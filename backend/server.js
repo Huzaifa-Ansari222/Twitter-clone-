@@ -9,8 +9,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000 ;
 
+app.use(express.json());//middleware to parse the body from req.body
 
-// console.log(process.env.MONGO_URI);
 
 
 app.use('/api/auth', authRoutes); //allroutes of auth /api/auth + /routes
