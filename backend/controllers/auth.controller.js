@@ -103,12 +103,21 @@ export const login = async (req, res) => {
 
     } catch(error){
         console.log('Error in login controller:', error.message);
-        res.status(500).json({ error: 'Internal server error!' });
+        res.status(500)
+        .json({ error: 'Internal server error!' });
     }
-} 
+};
 
+//logout controller func
 export const logout = async (req, res) => {
-    res.json({
-        data: "you hit the lo",
-    });
-} 
+    try{
+        res.cookie("jwt","",{maxAge:0})//(name of cookie jwt, empty,max age 0 to expire cookie)
+        res.status(200)
+        .json({message:"Logged out successfully"})
+    } catch(error) {
+        console.log("error in logout controller",error.message);
+        res.status(500)
+        .json({ error: 'Internal server error!' });
+        
+    }
+};
