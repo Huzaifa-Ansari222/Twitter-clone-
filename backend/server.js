@@ -10,13 +10,13 @@ const app = express();
 const PORT = process.env.PORT || 3000 ;
 
 app.use(express.json());//middleware to parse the body from req.body
+app.use(express.urlencoded({extended: true}));//enable x-www-form-url-encoded in postman
 
-
-
+//base route
 app.use('/api/auth', authRoutes); //allroutes of auth /api/auth + /routes
 
 
-
+//add port connect mongodb
 app.listen(PORT, () => {
     console.log(`server running on ${PORT}`);
     connectMongoDB();
