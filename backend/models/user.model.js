@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-//making collection
+//making collection of users
 const userSchema = new mongoose.Schema({
     username:{
         type: String,

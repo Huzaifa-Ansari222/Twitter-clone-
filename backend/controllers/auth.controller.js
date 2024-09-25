@@ -121,3 +121,14 @@ export const logout = async (req, res) => {
         
     }
 };
+
+//authentication checking for any CRUD operation we check auth or not
+export const getMe = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id).select("-password")//find by user id
+        res.status(200).json(user);
+    } catch (error) {
+        console.log("error in getMe controller", error.message);
+        res.status(500).json({error: "Internal Server Error"})
+    }
+};
