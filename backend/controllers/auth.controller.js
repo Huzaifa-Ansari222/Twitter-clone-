@@ -77,7 +77,8 @@ export const login = async (req, res) => {
     try{
         const {username, password} = req.body;//take from req.body
         //find by user by username
-        const user = await User.findOne({username})//find username in db 
+        const user = await User.findOne({username})//find username in db
+        console.log("User found:", user); // Add this line 
         // Compare the provided password with the stored hashed password
         const isPasswordCorrect = await bcrypt.compare(password, user?.password || "" );//user pass not empty
         
@@ -107,6 +108,51 @@ export const login = async (req, res) => {
         .json({ error: 'Internal server error!' });
     }
 };
+
+//new login
+// Login function controller
+// export const login = async (req, res) => {
+//     console.log("Login request body:", req.body); // Log the incoming request body
+
+//     try {
+
+//         const { username, password } = req.body; // Take from req.body
+//         // Find user by username
+//         const user = await User.findOne({ username }); // Find username in db 
+//         console.log("User found:", user); // Add this line
+
+//         // Check if user exists
+//         if (!user) {
+//             return res.status(400).json({ error: 'Invalid username or password!!' });
+//         }
+
+//         // Compare the provided password with the stored hashed password
+//         const isPasswordCorrect = await bcrypt.compare(password, user.password); // user.password is guaranteed to exist now
+
+//         if (!isPasswordCorrect) {
+//             return res.status(400).json({ error: 'Invalid username or password!!' });
+//         }
+
+//         // Generate JWT token and set it in a cookie
+//         generateTokenAndSetCookie(user._id, res);
+//         // Respond with user details
+//         res.status(200).json({
+//             _id: user._id,
+//             fullName: user.fullName,
+//             username: user.username,
+//             email: user.email,
+//             followers: user.followers,
+//             following: user.following,
+//             profileImg: user.profileImg,
+//             coverImg: user.coverImg,
+//         });
+
+//     } catch (error) {
+//         console.log('Error in login controller:', error.message);
+//         res.status(500).json({ error: 'Internal server error!' });
+//     }
+// };
+
 
 //logout controller func
 export const logout = async (req, res) => {

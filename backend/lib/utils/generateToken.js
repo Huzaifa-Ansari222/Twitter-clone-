@@ -10,6 +10,8 @@ export const generateTokenAndSetCookie = (userId, res) => { //creating token
         httpOnly: true,//prevetn xss atkk cross-site script atkk
         sameSite:"strict",//CRF atkk cross site scripts req forgery atkk
         secure: process.env.NODE_ENV !=="development",
+        // secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+
     })
 }
 
