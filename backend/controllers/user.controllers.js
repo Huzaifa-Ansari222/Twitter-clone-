@@ -1,3 +1,7 @@
+import bcrypt from 'bcryptjs';
+
+import {v2 as cloudinary} from 'cloudinary';
+//model
 import User from '../models/user.model.js';
 import Notification from '../models/notification.model.js'
 
@@ -137,9 +141,67 @@ export const updateUser = async (req, res) => {
     const userId = req.user._id;//get current user id
     try {
         //check ur or not
-        const user = await User.findById(userId);
-        if(!user) return res.status(404).json({ message: "user not found"});
+        let user = await User.findById(userId);//let use becz we update it later
+        if(!user) return res.status(404).json({ message: "User not found"});
+
+        //give newpass and curnnt both
+        if ( (!newPassword && currentPassword) || (!currentPassword && newPassword) ){
+            return res.status(404).json({ message: "Please provide both current password and new password"});
+        }
+        //compare crnt pass vs old pass
+        if(currentPassword && newPassword){
+            const isMatch = await bcrypt.compare(currentPassword, user.password);//currentpass compare to dbPassword
+            if(!isMatch) return res.status(404).json({error: "Current password is incorrect"});
+            if(newPassword.length < 6){
+                return res.status(400).json({error: "Password must be at leat 6 characters long"});
+            }
+            //hash and salt pass again 
+            const salt = await bcrypt.genSalt(10);
+            user.password = await bcrypt.hash(newPassword, salt);
+        }
+
+        //update profle img and coverimg
+        if(profileImg){
+            //delete old profile in cloudinary
+            if(user.profileImg){
+                //http://res.cloudinary.com/sdasd/imgage/upload/v1s23r/###########id.png
+                // delete profile img by targeting id of img 
+                await cloudinary.uploader.destroy(user.profileImg.split("/").pop().split(".")[0]);//pop frm last and split by . and get first which is id
+            }
+            //upload new profile
+            const uploadedRespone = await cloudinary.uploader.upload(profileImg)
+            profileImg = uploadedRespone.secure_url;//set upload profile
+        }
+
+        if(coverImg){
+            //delete old cover in cloudinary
+            if(user.coverImg){
+                await cloudinary.uploader.destroy(user.coverImg.split("/").pop().split(".")[0]);
+            }
+            // upld new cover 
+            const uploadedRespone = await cloudinary.uploader.upload(coverImg)
+            coverImg = uploadedRespone.secure_url;//set upload coverimg
+        }
+
+        //update to db
+        //if user give new data update it if not put old one
+        user.fullName = fullName || user.fullName;
+        user.email = email || user.email;
+        user.username = username || user.username;
+        user.bio = bio || user.bio;
+        user.link = link || user.link;
+        user.profileImg = profileImg || user.profileImg;
+        user.coverImg = coverImg || user.coverImg;
+        
+        user = await user.save();
+
+        user.password = null;//not send pass of user
+
+        return res.status(200).json(user);
+
     } catch (error) {
+        console.log("error in updateUser:", error.message);
+        res.status(500).json({error: error.message});
         
     }
 }
