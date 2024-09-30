@@ -1,6 +1,6 @@
 import Post from '../models/post.model.js';
 import User from '../models/user.model.js';
-import notificationModel from '../models/notification.model.js';
+import Notification from '../models/notification.model.js';
 import {v2 as cloudinary} from 'cloudinary';
 
 //create post controller func
@@ -114,7 +114,7 @@ export const likeUnlikePost = async (req, res) => {
 
         } else {
             //if like send notificaation
-            push.likes.push(userId);// Add the `userId` to the `likes` array of the post.
+            post.likes.push(userId);// Add the `userId` to the `likes` array of the post.
 
             await post.save();
             //import notification model
@@ -130,6 +130,15 @@ export const likeUnlikePost = async (req, res) => {
     } catch (error) {
         console.log("Error in linkeUnlikedPost controller:", error);
         res.status(500).json({error:"Internal server error"});
+        
+    }
+}
+
+//get all psot controller
+export const getAllPosts = async (req, res) => {
+    try {
+        
+    } catch (error) {
         
     }
 }
