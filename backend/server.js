@@ -6,6 +6,7 @@ import postRoutes from './routes/post.routes.js';
 import connectMongoDB from './db/connectMongoDB.js';
 import cookieParser from 'cookie-parser';
 import {v2 as cloudinary} from 'cloudinary'
+import notificationRoutes from './routes/notification.routes.js'
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use(cookieParser());
 app.use('/api/auth', authRoutes); //allroutes of auth /api/auth + /routes
 app.use('/api/users', userRoutes);
 app.use('/api/posts/', postRoutes);
+app.use('/api/notifications',notificationRoutes);
 
 //add port connect mongodb
 app.listen(PORT, () => {
@@ -35,4 +37,4 @@ app.listen(PORT, () => {
     connectMongoDB();
 });
 
-//2:12:00
+//2:32:00
