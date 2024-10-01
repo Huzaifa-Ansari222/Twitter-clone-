@@ -15,7 +15,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         minLength: 6,
-        // select: false, //edited by me
     },
     email:{
         type: String,
@@ -52,6 +51,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "",
         },
+    likedPosts:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Post",
+        default:[],
+    }],
     },
     {timestamps: true}
 );
