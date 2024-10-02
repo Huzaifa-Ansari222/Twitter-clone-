@@ -145,7 +145,6 @@ export const getAllPosts = async (req, res) => {
             select: "-password" ,
             // Exclude the password field from the populated user
         })
-        //not work error to do later
         .populate({
             path: "comments.user",
             select: "-password",

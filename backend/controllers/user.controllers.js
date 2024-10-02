@@ -31,11 +31,11 @@ export const followUnfollowUser = async (req, res) => {
 
         //check user follw himself not
         if(id === req.user._id.toString()){//obj to string same type as param
-            return res.status(400).json({error:"you cant follow/unfollow yourself"});
+            return res.status(400).json({error:"You can't follow/unfollow yourself"});
         }
         //check user tomodify or currnt user find or not
         if(!userToModify || !currentUser){
-            return res.status(400).json({error:"user not found"});
+            return res.status(400).json({error:"User not found"});
         }
         //chek u following user or not
         const isFollowing = currentUser.following.includes(id);//following schema
@@ -44,7 +44,9 @@ export const followUnfollowUser = async (req, res) => {
             //unnfllw user
             await User.findByIdAndUpdate(id, {$pull: { followers: req.user._id}}); //minus fllower
             await User.findByIdAndUpdate(req.user._id, { $pull: { following: id }});//me minus user frm fllwing
-            res.status(200).json({ message: "user unfollowed successfully"});
+
+            //TODO return the id of thre user as a respone
+            res.status(200).json({ message: "User unfollowed successfully"});
         } else{
             //fllow user       
 /*
@@ -84,12 +86,12 @@ Hanj's followers array becomes [1].
             await newNotification.save();
 
             //todo retun the id of the user as a respone
-            res.status(200).json({ message: "user followed successfully"});
+            res.status(200).json({ message: "User followed successfully"});
 
         }
     } catch (error) {
         res.status(500).json({error:error.message});
-        console.log("error in getUserProfile:" ,error.message);
+        console.log("Error in getUserProfile:" ,error.message);
         
     }
 }
@@ -200,7 +202,7 @@ export const updateUser = async (req, res) => {
         return res.status(200).json(user);
 
     } catch (error) {
-        console.log("error in updateUser:", error.message);
+        console.log("Error in updateUser:", error.message);
         res.status(500).json({error: error.message});
         
     }
