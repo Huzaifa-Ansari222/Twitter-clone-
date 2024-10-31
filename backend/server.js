@@ -19,7 +19,7 @@ cloudinary.config({
 const app = express();
 const PORT = process.env.PORT || 3000 ;
 
-app.use(express.json());//middleware to parse the body from req.body
+app.use(express.json({limit:"5mb"}));//middleware to parse the body from req.body / 5mb DOS atkk avoid
 app.use(express.urlencoded({extended: true}));//enable x-www-form-url-encoded in postman
 
 //auth token verify
