@@ -43,11 +43,11 @@ function App() {
 	}
 
 	return (
-		<div className='flex max-w-6xl mx-auto'>
+		<div className='flex flex-col md:flex-row max-w-6xl mx-auto '>
 			{/* Common component, bc it's not wrapped with Routes */}
 			{authUser && <Sidebar />}
 			<Routes>
-				<Route path='/' element={authUser ? <HomePage /> : <Navigate to='/login' />} />
+				<Route path='/' element={authUser ? <HomePage /> : <Navigate to='/login' /> } />
 				<Route path='/login' element={!authUser ? <LoginPage /> : <Navigate to='/' />} />
 				<Route path='/signup' element={!authUser ? <SignUpPage /> : <Navigate to='/' />} />
 				<Route path='/notifications' element={authUser ? <NotificationPage /> : <Navigate to='/login' />} />

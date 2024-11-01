@@ -49,29 +49,29 @@ const NotificationPage = () => {
 
 	return (
 		<>
-			<div className='flex-[4_4_0] border-l border-r border-gray-700 min-h-screen'>
-				<div className='flex justify-between items-center p-4 border-b border-gray-700'>
+			<div className='md:flex-[4_4_0] border-l border-r border-gray-700 min-h-full md:mt-0 mt-[10vh]  w-full'>
+				<div className='flex  justify-center gap-8  items-center p-4 border-b border-gray-700  '>
 					<p className='font-bold'>Notifications</p>
 					<div className='dropdown '>
-						<div tabIndex={0} role='button' className='m-1'>
-							<IoSettingsOutline className='w-4' />
+						<div tabIndex={0} role='button' className='m-1 '>
+							<IoSettingsOutline className='w-4'  />
 						</div>
 						<ul
 							tabIndex={0}
-							className='dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52'
+							className='dropdown-content z-[1] md:p-2  md:menu shadow bg-base-100 rounded-box w-[100px] md:w-52 '
 						>
-							<li>
-								<a onClick={deleteNotifications}>Delete all notifications</a>
+							<li className=" py-[10px] px-[15px]  border border-white rounded-full ">
+								<a onClick={deleteNotifications}>Delete all</a>
 							</li>
 						</ul>
 					</div>
 				</div>
 				{isLoading && (
-					<div className='flex justify-center h-full items-center'>
+					<div className='flex justify-centerh-full items-center'>
 						<LoadingSpinner size='lg' />
 					</div>
 				)}
-				{notifications?.length === 0 && <div className='text-center p-4 font-bold'>No notifications 🤔</div>}
+				{notifications?.length === 0 && <div className='text-center p-4 font-bold'>No notifications yet</div>}
 				{notifications?.map((notification) => (
 					<div className='border-b border-gray-700' key={notification._id}>
 						<div className='flex gap-2 p-4'>

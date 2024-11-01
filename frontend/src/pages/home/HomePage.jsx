@@ -8,9 +8,9 @@ const HomePage = () => {
 
 	return (
 		<>
-			<div className='flex-[4_4_0] mr-auto border-r border-gray-700 min-h-screen'>
+			<div className='flex-[4_4_0] mr-auto md:border-r border-l w-full border-gray-700 min-h-screen md:mt-0 mt-[10vh]'>
 				{/* Header */}
-				<div className='flex w-full border-b border-gray-700'>
+				<div className='flex w-full border-b  border-gray-700'>
 					<div
 						className={
 							"flex justify-center flex-1 p-3 hover:bg-secondary transition duration-300 cursor-pointer relative"
