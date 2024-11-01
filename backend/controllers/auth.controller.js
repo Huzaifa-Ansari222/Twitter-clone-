@@ -78,7 +78,7 @@ export const login = async (req, res) => {
         const {username, password} = req.body;//take from req.body
         //find by user by username
         const user = await User.findOne({username})//find username in db
-        console.log("User found:", user); // Add this line 
+        // console.log("User found:", user); // Add this line 
         // Compare the provided password with the stored hashed password
         const isPasswordCorrect = await bcrypt.compare(password, user?.password || "" );//user pass not empty
         
