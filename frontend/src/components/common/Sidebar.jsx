@@ -36,10 +36,11 @@ const Sidebar = () => {
 
 	return (
 		<div className='flex md:flex-[2_2_0] justify-center  w- md:max-w-52 '>
-			<div className='fixed md:sticky top-0 md:left-0 flex flex-row justify-evenly items-center md:flex-col border-r border-black w-screen  h-[10vh] md:h-screen md:w-20 z-50 bg-black   '>
+				<div className='fixed md:sticky top-0 md:left-0 flex flex-row justify-evenly items-center md:flex-col border-b-[1px] md:border-none w-screen h-[10vh] md:h-screen md:w-20 z-50 bg-black border-gray-500 '>
+			{/* <div className='fixed md:sticky top-0 md:left-0 flex flex-row justify-evenly items-center md:flex-col border-r md:border-none md:border-black w-screen  h-[10vh] md:h-screen md:w-20 z-50 bg-black '> */}
 				<Link to='/' className='flex justify-center md:justify-start'>
 				<XSvg 
-						className={`px-2 w-12 h-12 rounded-full fill-white transition-all duration-300 ${
+						className={`px-2 w-10 h-10 md:h-12 md:w-12 rounded-full fill-white transition-all duration-300 ${
 							location.pathname === '/' ? 'black' : 'hover:bg-stone-900' // Active and hover styles
 						}`} 
 					/>				</Link>
@@ -47,18 +48,18 @@ const Sidebar = () => {
 					<li className='flex justify-center md:justify-start'>
 						<Link
 							to='/'
-							className={`flex gap-3 items-center  transition-all rounded-full duration-300 py-2 pl-2 pr-4 max-w-fit cursor-pointer ${
+							className={`flex gap-3 items-center  transition-all rounded-full duration-300 py-2 pl-2 pr-2 max-w-fit cursor-pointer ${
 								location.pathname === '/' ? 'bg-[#ffffff14]' : 'hoverbg-[#ffffff14]' // Change: Conditional class for active link
 							}`}
 						>
-							<MdHomeFilled className='w-8 h-8' />
+							<MdHomeFilled className='w-6 h-6' />
 							<span className='text-lg hidden md:block'>Home</span>
 						</Link>
 					</li>
 					<li className='flex justify-center md:justify-start'>
 						<Link
 							to='/notifications'
-							className={`flex gap-3 items-center transition-all rounded-full duration-300 py-2 pl-2 pr-4 max-w-fit cursor-pointer ${
+							className={`flex gap-3 items-center transition-all rounded-full duration-300 py-2 pl-2 pr-2 max-w-fit cursor-pointer ${
 								location.pathname === '/notifications' ? 'bg-[#ffffff14]' : 'hover:bg-[#ffffff14]' // Change: Conditional class for active link
 							}`}
 						>
@@ -69,11 +70,11 @@ const Sidebar = () => {
 					<li className='flex justify-center md:justify-start'>
 						<Link
 							to={`/profile/${authUser?.username}`}
-							className={`flex gap-3 items-center transition-all rounded-full duration-300 py-2 pl-2 pr-4 max-w-fit cursor-pointer ${
+							className={`flex gap-3 items-center transition-all rounded-full duration-300 py-2 pl-2 pr-2 max-w-fit cursor-pointer ${
 								location.pathname === `/profile/${authUser?.username}` ? 'bg-[#ffffff14]' : 'hover:bg-[#ffffff14]' // Change: Conditional class for active link
 							}`}
 						>
-							<FaUser className='w-6 h-6' />
+							<FaUser className='w-6 h-5 ' />
 							<span className='text-lg hidden md:block'>Profile</span>
 						</Link>
 					</li>
@@ -81,20 +82,20 @@ const Sidebar = () => {
 				{authUser && (
 					<Link
 						to={`/profile/${authUser.username}`}
-						className='md:mt-auto md:mb-10 flex gap-2 items-start transition-all duration-300 hover:bg-[#181818] py-2 px-4 rounded-full'
+						className='md:mt-auto md:mb-10 flex gap-2 items-start transition-all duration-300 hover:bg-[#181818] py-2 px-2 rounded-full'
 					>
 						<div className='avatar hidden md:inline-flex'>
 							<div className='w-8 rounded-full'>
 								<img src={authUser?.profileImg || "/avatar-placeholder.png"} alt="User Avatar" />
 							</div>
 						</div>
-						<div className='flex justify-between flex-1'>
+						<div className='flex justify-between flex-1 '>
 							<div className='hidden md:block'>
 								<p className='text-white font-bold text-sm w-20 truncate'>{authUser?.fullName}</p>
 								<p className='text-slate-500 text-sm'>@{authUser?.username}</p>
 							</div>
 							<BiLogOut
-								className='w-5 h-5 cursor-pointer'
+								className='w-6 h-6 cursor-pointer '
 								onClick={(e) => {
 									e.preventDefault();
 									logout();
