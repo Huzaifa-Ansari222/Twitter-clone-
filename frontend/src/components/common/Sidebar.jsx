@@ -49,7 +49,7 @@ const Sidebar = () => {
 						<Link
 							to='/'
 							className={`flex gap-3 items-center  transition-all rounded-full duration-300 py-2 pl-2 pr-2 max-w-fit cursor-pointer ${
-								location.pathname === '/' ? 'bg-[#ffffff14]' : 'hoverbg-[#ffffff14]' // Change: Conditional class for active link
+								location.pathname === '/' ? 'bg-[#ffffff21]' : 'hoverbg-[#ffffff21]' // Change: Conditional class for active link
 							}`}
 						>
 							<MdHomeFilled className='w-6 h-6' />
@@ -60,7 +60,7 @@ const Sidebar = () => {
 						<Link
 							to='/notifications'
 							className={`flex gap-3 items-center transition-all rounded-full duration-300 py-2 pl-2 pr-2 max-w-fit cursor-pointer ${
-								location.pathname === '/notifications' ? 'bg-[#ffffff14]' : 'hover:bg-[#ffffff14]' // Change: Conditional class for active link
+								location.pathname === '/notifications' ? 'bg-[#ffffff21]' : 'hover:bg-[#ffffff21]' // Change: Conditional class for active link
 							}`}
 						>
 							<IoNotifications className='w-6 h-6' />
@@ -71,7 +71,7 @@ const Sidebar = () => {
 						<Link
 							to={`/profile/${authUser?.username}`}
 							className={`flex gap-3 items-center transition-all rounded-full duration-300 py-2 pl-2 pr-2 max-w-fit cursor-pointer ${
-								location.pathname === `/profile/${authUser?.username}` ? 'bg-[#ffffff14]' : 'hover:bg-[#ffffff14]' // Change: Conditional class for active link
+								location.pathname === `/profile/${authUser?.username}` ? 'bg-[#ffffff21]' : 'hover:bg-[#ffffff21]' // Change: Conditional class for active link
 							}`}
 						>
 							<FaUser className='w-6 h-5 ' />
